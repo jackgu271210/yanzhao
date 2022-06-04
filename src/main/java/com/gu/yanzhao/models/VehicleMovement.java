@@ -1,5 +1,7 @@
 package com.gu.yanzhao.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -20,30 +24,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Client {
+public class VehicleMovement {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
-	private String name;
-	private String address;
-	private String city;
-	private String phone;
-	private String mobile;
-	private String website;
-	private String email;
+	@ManyToOne
+	@JoinColumn(name="vehicleid", insertable=false, updatable=false)
+	private Vehicle vehicle;
+	private int vehicleid;
 	
 	@ManyToOne
-	@JoinColumn(name="countryid", insertable=false, updatable=false)
-	private Country country;
-	private Integer countryid;
+	@JoinColumn(name="locationid1", insertable=false, updatable=false)
+	private Location location1;
+	private int locationid1;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")	
+	private Date date1;
 	
 	@ManyToOne
-	@JoinColumn(name="stateid", insertable=false, updatable=false)
-	private State state;	
-	private Integer stateid;
+	@JoinColumn(name="locationid2", insertable=false, updatable=false)
+	private Location location2;
+	private int locationid2;
 	
-	private String details;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")		
+	private Date date2;
+
+	private String remarks;
 }
