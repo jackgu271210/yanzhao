@@ -534,6 +534,7 @@
                   <th>Description</th>
                   <th>Capital</th>
                   <th>Code</th>
+                  <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -542,6 +543,11 @@
                     <td th:text="${country.description}"></td>
                     <td th:text="${country.capital}"></td>
                     <td th:text="${country.code}"></td>
+                    <td>
+                      <a th:href="@{/country/findById/(id={country.id})}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
+                        Edit
+                      </a>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -605,8 +611,47 @@
       </div>
     </div>
   </div><!-- End Basic Modal-->
-  
-  
+
+  <div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update Country</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/country/add}" class="row g-3" method="post">
+            <div class="col-12">
+              <label for="descriptionEdit" class="form-label">Description:</label>
+              <input type="text" class="form-control" id="descriptionEdit" name="description">
+            </div>
+            <div class="col-12">
+              <label for="capitalEdit" class="form-label">Capital:</label>
+              <input type="text" class="form-control" id="capitalEdit" name="capital">
+            </div>
+            <div class="col-12">
+              <label for="codeEdit" class="form-label">Code:</label>
+              <input type="text" class="form-control" id="codeEdit" name="code">
+            </div>
+            <div class="col-12">
+              <label for="continentEdit" class="form-label">Continent:</label>
+              <input type="text" class="form-control" id="continentEdit" name="continent">
+            </div>
+            <div class="col-12">
+              <label for="nationalityEdit" class="form-label">Nationality:</label>
+              <input type="text" class="form-control" id="nationalityEdit" name="nationality">
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+          </form><!-- Vertical Form -->
+        </div>
+      </div>
+    </div>
+  </div><!-- End Basic Modal-->
+
+  <script src="assets/js/jquery-3.6.0.min.js"></script>
   
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -620,6 +665,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/country.js"></script>
 
 </body>
 

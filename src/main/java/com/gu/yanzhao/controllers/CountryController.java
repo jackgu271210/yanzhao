@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class CountryController {
@@ -27,5 +30,11 @@ public class CountryController {
     public String addCountry(Country country) {
         countryService.save(country);
         return "redirect:/country";
+    }
+    
+    @RequestMapping("country/findById")
+    @ResponseBody
+    public Optional<Country> findById(Integer id) {
+        return countryService.findById(id);
     }
 }
