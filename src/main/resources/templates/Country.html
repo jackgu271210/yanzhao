@@ -508,7 +508,6 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>List of Countries</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -521,9 +520,14 @@
     <section class="section">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
+              <h5 class="card-title">List of Countries</h5>
+              <p class="card-text">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                  Add Country
+                </button>
+              </p>
               <!-- Default Table -->
-              <table class="table">
+              <table class="table table-striped">
                 <thead>
                 <tr>
                   <th>id</th>
@@ -563,6 +567,47 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+  <div class="modal fade" id="addModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Basic Modal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/country/add}" class="row g-3" method="post">
+            <div class="col-12">
+              <label for="inputDescription" class="form-label">Description:</label>
+              <input type="text" class="form-control" id="inputDescription" name="description">
+            </div>
+            <div class="col-12">
+              <label for="inputCapital" class="form-label">Capital:</label>
+              <input type="text" class="form-control" id="inputCapital" name="capital">
+            </div>
+            <div class="col-12">
+              <label for="inputCode" class="form-label">Code:</label>
+              <input type="text" class="form-control" id="inputCode" name="code">
+            </div>
+            <div class="col-12">
+              <label for="inputContinent" class="form-label">Continent:</label>
+              <input type="text" class="form-control" id="inputContinent" name="continent">
+            </div>
+            <div class="col-12">
+              <label for="inputNationality" class="form-label">Nationality:</label>
+              <input type="text" class="form-control" id="inputNationality" name="nationality">
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+          </form><!-- Vertical Form -->
+         </div>
+      </div>
+    </div>
+  </div><!-- End Basic Modal-->
+  
+  
+  
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
