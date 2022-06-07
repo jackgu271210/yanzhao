@@ -544,7 +544,7 @@
                     <td th:text="${country.capital}"></td>
                     <td th:text="${country.code}"></td>
                     <td>
-                      <a th:href="@{/country/findById/(id={country.id})}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
+                      <a th:href="@{/country/findById/(id=${country.id})}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
                         Edit
                       </a>
                     </td>
@@ -620,14 +620,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form th:action="@{/country/add}" class="row g-3" method="post">
+          <form th:action="@{/country/update}" class="row g-3" method="put">
+            <div class="col-12">
+              <label for="idEdit" class="form-label">Id:</label>
+              <input type="text" class="form-control" id="idEdit" name="id" readonly>
+            </div>
             <div class="col-12">
               <label for="descriptionEdit" class="form-label">Description:</label>
               <input type="text" class="form-control" id="descriptionEdit" name="description">
             </div>
             <div class="col-12">
               <label for="capitalEdit" class="form-label">Capital:</label>
-              <input type="text" class="form-control" id="capitalEdit" name="capital">
+              <input type="text" class="form-control" id="capitalEdit" name="capital" th:text="${country.capital}">
             </div>
             <div class="col-12">
               <label for="codeEdit" class="form-label">Code:</label>
