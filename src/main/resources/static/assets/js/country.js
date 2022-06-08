@@ -1,16 +1,30 @@
 $(document).ready(function() {
-    $('#editButton').on('click',function(event) {
-        // console.log('sussess');
-        // $('#editModal').modal();
-        var href = $(this).attr('href');
-        $.get(href,function(country,status) {
-            $('#idEdit').val(country.id);
-            $('#descriptionEdit').val(country.description);
-            $('#capitalEdit').val(country.capital);
-            $('#codeEdit').val(country.code);
-            $('#continentEdit').val(country.continent);
-            $('#nationalityEdit').val(country.nationality);
+    $('table #editButton').on('click',function(event) {
+        event.preventDefault();
+        var myModal = new bootstrap.Modal(document.getElementById('editModal'), {
+            keyboard: false
         });
-        $('#editModal').modal();
+        var href = $(this).attr('href');
+        $.get(href,function(state,status) {
+            $('#idEdit').val(state.id);
+            $('#descriptionEdit').val(state.description);
+            $('#capitalEdit').val(state.capital);
+            $('#codeEdit').val(state.code);
+            $('#continentEdit').val(state.continent);
+            $('#nationalityEdit').val(state.nationality);
+        });
+        myModal.show();
+    });
+    
+    $('table #deleteButton').on('click',function(event) {
+        event.preventDefault();
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'), {
+            keyboard: false
+        });
+        var href = $(this).attr('href');
+        $('#confirmDeleteButton').attr('href',href);
+        deleteModal.show();
     })
+    
+    
 })

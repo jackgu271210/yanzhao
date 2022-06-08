@@ -544,8 +544,14 @@
                     <td th:text="${country.capital}"></td>
                     <td th:text="${country.code}"></td>
                     <td>
-                      <a th:href="@{/country/findById/(id=${country.id})}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal">
-                        Edit
+                      <a th:href="@{/country/findById/(id=${country.id})}" class="btn btn-primary" id="editButton">
+                        <i class="bi bi-pencil-square"></i>
+                      </a>
+                      <a class="btn btn-success" id="detailsButton">
+                        <i class="bi bi-file-earmark-richtext"></i>
+                      </a>
+                      <a th:href="@{/country/delete/(id=${country.id})}" class="btn btn-danger" id="deleteButton">
+                        <i class="bi bi-x-circle-fill"></i>
                       </a>
                     </td>
                   </tr>
@@ -631,7 +637,7 @@
             </div>
             <div class="col-12">
               <label for="capitalEdit" class="form-label">Capital:</label>
-              <input type="text" class="form-control" id="capitalEdit" name="capital" th:text="${country.capital}">
+              <input type="text" class="form-control" id="capitalEdit" name="capital">
             </div>
             <div class="col-12">
               <label for="codeEdit" class="form-label">Code:</label>
@@ -655,6 +661,24 @@
     </div>
   </div><!-- End Basic Modal-->
 
+  <div class="modal" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Delete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this record?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" id="confirmDeleteButton">Yes, Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <script src="assets/js/jquery-3.6.0.min.js"></script>
   
   <!-- Vendor JS Files -->

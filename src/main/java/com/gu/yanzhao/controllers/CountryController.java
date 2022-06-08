@@ -5,10 +5,7 @@ import com.gu.yanzhao.services.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,5 +33,17 @@ public class CountryController {
     @ResponseBody
     public Optional<Country> findById(Integer id) {
         return countryService.findById(id);
+    }
+    
+    @RequestMapping("/country/update")
+    public String update(Country country) {
+        countryService.save(country);
+        return "redirect:/country";
+    }
+    
+    @RequestMapping("/country/delete")
+    public String delete(Integer id) {
+        countryService.delete(id);
+        return "redirect:/country";
     }
 }
