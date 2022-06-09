@@ -14,7 +14,7 @@ public class StateService {
     @Autowired
     private StateRepository stateRepository;
 
-    // return list of countries
+    // return list of states
     public List<State> getState() {
         return stateRepository.findAll();
     }

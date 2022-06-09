@@ -1,6 +1,7 @@
 package com.gu.yanzhao.controllers;
 
 import com.gu.yanzhao.models.State;
+import com.gu.yanzhao.services.CountryService;
 import com.gu.yanzhao.services.StateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,11 +19,14 @@ public class StateController {
 
     @Autowired
     private StateService stateService;
+    
+    @Autowired
+    private CountryService countryService;
 
     @GetMapping("/state")
     public String goState(Model model) {
-        List<State> stateList = stateService.getState();
-        model.addAttribute("countries",stateList);
+        model.addAttribute("states",stateService.getState());
+        model.addAttribute("countries",countryService.getCountry());
         return "State";
     }
 
