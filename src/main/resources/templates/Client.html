@@ -271,10 +271,10 @@
   <!-- ======= Sidebar ======= -->
   <div th:replace="fragments/SideBar :: sidebar"></div>
 
+  <!-- ======= Main ======= -->
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>List of Countries</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -285,32 +285,52 @@
     </div><!-- End Page Title -->
 
     <section class="section">
-      <div class="row">
-        <div class="col-lg-6">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
-              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col-lg-6">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
-              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-            </div>
-          </div>
-
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">List of Clients</h5>
+          <p class="card-text">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+              Add Client
+            </button>
+          </p>
+          <!-- Default Table -->
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Website</th>
+              <th>Email</th>
+              <th>City</th>
+              <th>Phone</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="client : ${clients}">
+              <td th:text="${client.name}">Name</td>
+              <td th:text="${client.website}">Website</td>
+              <td th:text="${client.email}">Email</td>
+              <td th:text="${client.city}">City</td>
+              <td th:text="${client.phone}">Phone</td>
+              <td>
+                <a th:href="@{/client/findById/(id=${client.id})}" class="btn btn-primary" id="editButton">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+                <a th:href="@{/client/findById/(id=${client.id})}" class="btn btn-success" id="detailsButton">
+                  <i class="bi bi-file-earmark-richtext"></i>
+                </a>
+                <a th:href="@{/client/delete/(id=${client.id})}" class="btn btn-danger" id="deleteButton">
+                  <i class="bi bi-x-circle-fill"></i>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
-  </main><!-- End #main -->
+  </main>
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
@@ -321,12 +341,254 @@
       <!-- All the links in the footer should remain intact. -->
       <!-- You can delete the links only if you purchased the pro version. -->
       <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      <!-- Purchase the pro version with working PHP/AJAX client form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
       Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
     </div>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- ======= Model ======= -->
+  <div class="modal fade" id="addModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Client</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/client/add}" class="row g-3" method="post">
+<!--            <div class="col-6">-->
+<!--              <label for="idAdd" class="form-label">Id:</label>-->
+<!--              <input type="text" class="form-control" id="idAdd" name="id" readonly>-->
+<!--            </div>-->
+            <div class="col-6">
+              <label for="selectStateAdd" class="form-label">State/Province:</label>
+              <select class="form-select" id="selectStateAdd" aria-label="Default select example" name="stateid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="state : ${states}"
+                        th:value="${state.id}"
+                        th:text="${state.name}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="nameAdd" class="form-label">Name:</label>
+              <input type="text" class="form-control" id="nameAdd" name="name" required>
+            </div>
+            <div class="col-6">
+              <label for="selectCountryAdd" class="form-label">Country:</label>
+              <select class="form-select" id="selectCountryAdd" aria-label="Default select example" name="countryid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="country : ${countries}"
+                        th:value="${country.id}"
+                        th:text="${country.description}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="detailsAdd" class="form-label">Details:</label>
+              <input type="text" class="form-control" id="detailsAdd" name="details" required>
+            </div>
+            <div class="col-6">
+              <label for="cityAdd" class="form-label">City:</label>
+              <input type="text" class="form-control" id="cityAdd" name="city" required>
+            </div>
+            <div class="col-6">
+              <label for="websiteAdd" class="form-label">Website:</label>
+              <input type="text" class="form-control" id="websiteAdd" name="website" required>
+            </div>
+            <div class="col-6">
+              <label for="phoneAdd" class="form-label">Phone:</label>
+              <input type="text" class="form-control" id="phoneAdd" name="phone" required>
+            </div>
+            <div class="col-6">
+              <label for="addressAdd" class="form-label">Address:</label>
+              <input type="text" class="form-control" id="addressAdd" name="address" required>
+            </div>
+            <div class="col-6">
+              <label for="mobileAdd" class="form-label">Mobile:</label>
+              <input type="text" class="form-control" id="mobileAdd" name="mobile" required>
+            </div>
+            <div class="col-6">
+              <label for="emailAdd" class="form-label">Email:</label>
+              <input type="text" class="form-control" id="emailAdd" name="email" required>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+          </form><!-- Vertical Form -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update Client</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/client/update}" class="row g-3" method="put">
+            <div class="col-6">
+              <label for="idEdit" class="form-label">Id:</label>
+              <input type="text" class="form-control" id="idEdit" name="id" readonly>
+            </div>
+            <div class="col-6">
+              <label for="selectStateEdit" class="form-label">State/Province:</label>
+              <select class="form-select" id="selectStateEdit" aria-label="Default select example" name="stateid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="state : ${states}"
+                        th:value="${state.id}"
+                        th:text="${state.name}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="nameEdit" class="form-label">Name:</label>
+              <input type="text" class="form-control" id="nameEdit" name="name" required>
+            </div>
+            <div class="col-6">
+              <label for="selectCountryEdit" class="form-label">Country:</label>
+              <select class="form-select" id="selectCountryEdit" aria-label="Default select example" name="countryid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="country : ${countries}"
+                        th:value="${country.id}"
+                        th:text="${country.description}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="detailsEdit" class="form-label">Details:</label>
+              <input type="text" class="form-control" id="detailsEdit" name="details" required>
+            </div>
+            <div class="col-6">
+              <label for="cityEdit" class="form-label">City:</label>
+              <input type="text" class="form-control" id="cityEdit" name="city" required>
+            </div>
+            <div class="col-6">
+              <label for="websiteEdit" class="form-label">Website:</label>
+              <input type="text" class="form-control" id="websiteEdit" name="website" required>
+            </div>
+            <div class="col-6">
+              <label for="phoneEdit" class="form-label">Phone:</label>
+              <input type="text" class="form-control" id="phoneEdit" name="phone" required>
+            </div>
+            <div class="col-6">
+              <label for="addressEdit" class="form-label">Address:</label>
+              <input type="text" class="form-control" id="addressEdit" name="address" required>
+            </div>
+            <div class="col-6">
+              <label for="mobileEdit" class="form-label">Mobile:</label>
+              <input type="text" class="form-control" id="mobileEdit" name="mobile" required>
+            </div>
+            <div class="col-6">
+              <label for="emailEdit" class="form-label">Email:</label>
+              <input type="text" class="form-control" id="emailEdit" name="email" required>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+          </form><!-- Vertical Form -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="detailsModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Client Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/client/update}" class="row g-3" method="put">
+            <div class="col-6">
+              <label for="idDetails" class="form-label">Id:</label>
+              <input type="text" class="form-control" id="idDetails" name="id" readonly>
+            </div>
+            <div class="col-6">
+              <label for="selectStateDetails" class="form-label">State/Province:</label>
+              <select class="form-select" id="selectStateDetails" aria-label="Default select example" name="stateid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="state : ${states}"
+                        th:value="${state.id}"
+                        th:text="${state.name}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="nameDetails" class="form-label">Name:</label>
+              <input type="text" class="form-control" id="nameDetails" name="name" required>
+            </div>
+            <div class="col-6">
+              <label for="selectCountryDetails" class="form-label">Country:</label>
+              <select class="form-select" id="selectCountryDetails" aria-label="Default select example" name="countryid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="country : ${countries}"
+                        th:value="${country.id}"
+                        th:text="${country.description}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="details" class="form-label">Details:</label>
+              <input type="text" class="form-control" id="details" name="details" required>
+            </div>
+            <div class="col-6">
+              <label for="cityDetails" class="form-label">City:</label>
+              <input type="text" class="form-control" id="cityDetails" name="city" required>
+            </div>
+            <div class="col-6">
+              <label for="websiteDetails" class="form-label">Website:</label>
+              <input type="text" class="form-control" id="websiteDetails" name="website" required>
+            </div>
+            <div class="col-6">
+              <label for="phoneDetails" class="form-label">Phone:</label>
+              <input type="text" class="form-control" id="phoneDetails" name="phone" required>
+            </div>
+            <div class="col-6">
+              <label for="addressDetails" class="form-label">Address:</label>
+              <input type="text" class="form-control" id="addressDetails" name="address" required>
+            </div>
+            <div class="col-6">
+              <label for="mobileDetails" class="form-label">Mobile:</label>
+              <input type="text" class="form-control" id="mobileDetails" name="mobile" required>
+            </div>
+            <div class="col-6">
+              <label for="emailDetails" class="form-label">Email:</label>
+              <input type="text" class="form-control" id="emailDetails" name="email" required>
+            </div>
+          </form><!-- Vertical Form -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Delete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this record?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" id="confirmDeleteButton">Yes, Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/jquery-3.6.0.min.js"></script>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -340,6 +602,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/client.js"></script>
 
 </body>
 
