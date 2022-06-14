@@ -224,7 +224,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="assets/users-profile.html">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
               </a>
@@ -234,7 +234,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" href="assets/users-profile.html">
                 <i class="bi bi-gear"></i>
                 <span>Account Settings</span>
               </a>
@@ -244,7 +244,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+              <a class="dropdown-item d-flex align-items-center" href="assets/pages-faq.html">
                 <i class="bi bi-question-circle"></i>
                 <span>Need Help?</span>
               </a>
@@ -372,7 +372,7 @@
             </div>
             <div class="col-12">
               <label for="invoiceDateAdd" class="form-label">Invoice Date:</label>
-              <input type="text" class="form-control" id="invoiceDateAdd" name="invoiceDate" required>
+              <input type="date" class="form-control" id="invoiceDateAdd" name="invoiceDate" required>
             </div>
             <div class="col-12">
             <label for="selectInvoiceStatusAdd" class="form-label">Invoice Status:</label>
@@ -402,7 +402,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Update Invoice</h5>
+          <h5 class="modal-title">Edit Invoice Record</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -412,30 +412,32 @@
               <input type="text" class="form-control" id="idEdit" name="id" readonly>
             </div>
             <div class="col-12">
-              <label for="selectCountryEdit" class="form-label">Description:</label>
-              <select class="form-select" id="selectCountryEdit" aria-label="Default select example" name="clientid" required>
+              <label for="selectClientEdit" class="form-label">Client:</label>
+              <select class="form-select" id="selectClientEdit" aria-label="Default select example" name="clientid" required>
                 <option selected>-SELECT-</option>
-                <option th:each="client : ${countries}"
+                <option th:each="client : ${clients}"
                         th:value="${client.id}"
-                        th:text="${client.description}"
+                        th:text="${client.name}"
                 ></option>
               </select>
             </div>
             <div class="col-12">
-              <label for="nameEdit" class="form-label">Description:</label>
-              <input type="text" class="form-control" id="nameEdit" name="name" required>
+              <label for="invoiceDateEdit" class="form-label">Invoice Date:</label>
+              <input type="text" class="form-control" id="invoiceDateEdit" name="invoiceDate" required>
             </div>
             <div class="col-12">
-              <label for="codeEdit" class="form-label">Code:</label>
-              <input type="text" class="form-control" id="codeEdit" name="code" required>
+              <label for="selectInvoiceStatusEdit" class="form-label">Invoice Status:</label>
+              <select class="form-select" id="selectInvoiceStatusEdit" aria-label="Default select example" name="invoicestatusid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="invoiceStatus : ${invoiceStatuses}"
+                        th:value="${invoiceStatus.id}"
+                        th:text="${invoiceStatus.description}"
+                ></option>
+              </select>
             </div>
             <div class="col-12">
-              <label for="capitalEdit" class="form-label">Capital:</label>
-              <input type="text" class="form-control" id="capitalEdit" name="capital" required>
-            </div>
-            <div class="col-12">
-              <label for="detailsEdit" class="form-label">Details:</label>
-              <input type="text" class="form-control" id="detailsEdit" name="details" required>
+              <label for="remarksEdit" class="form-label">Remarks:</label>
+              <input type="text" class="form-control" id="remarksEdit" name="remarks" required>
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -461,38 +463,32 @@
               <input type="text" class="form-control" id="idDetails" name="id" readonly>
             </div>
             <div class="col-12">
-              <label for="clientDetails" class="form-label">Description:</label>
-              <select class="form-select" id="clientDetails" aria-label="Default select example" name="clientid">
+              <label for="selectClientDetails" class="form-label">Client:</label>
+              <select class="form-select" id="selectClientDetails" aria-label="Default select example" name="clientid">
                 <option selected>-SELECT-</option>
-                <option th:each="client : ${countries}"
+                <option th:each="client : ${clients}"
                         th:value="${client.id}"
-                        th:text="${client.description}"
+                        th:text="${client.name}"
                 ></option>
               </select>
             </div>
             <div class="col-12">
-              <label for="nameDetails" class="form-label">Description:</label>
-              <input type="text" class="form-control" id="nameDetails" name="name">
+              <label for="invoiceDateDetails" class="form-label">Invoice Date:</label>
+              <input type="text" class="form-control" id="invoiceDateDetails" name="invoiceDate">
             </div>
             <div class="col-12">
-              <label for="codeDetails" class="form-label">Code:</label>
-              <input type="text" class="form-control" id="codeDetails" name="code">
+              <label for="selectInvoiceStatusDetails" class="form-label">Invoice Status:</label>
+              <select class="form-select" id="selectInvoiceStatusDetails" aria-label="Default select example" name="clientid">
+                <option selected>-SELECT-</option>
+                <option th:each="invoiceStatus : ${invoiceStatuses}"
+                        th:value="${invoiceStatus.id}"
+                        th:text="${invoiceStatus.description}"
+                ></option>
+              </select>
             </div>
             <div class="col-12">
-              <label for="capitalDetails" class="form-label">Continent:</label>
-              <input type="text" class="form-control" id="capitalDetails" name="capital">
-            </div>
-            <div class="col-12">
-              <label for="details" class="form-label">Nationality:</label>
-              <input type="text" class="form-control" id="details" name="details">
-            </div>
-            <div class="col-12">
-              <label for="lastModifiedByDetails" class="form-label">Last Updated By:</label>
-              <input type="text" class="form-control" id="lastModifiedByDetails" name="lastModifiedBy">
-            </div>
-            <div class="col-12">
-              <label for="lastModifiedDateDetails" class="form-label">Last Updated On:</label>
-              <input type="text" class="form-control" id="lastModifiedDateDetails" name="lastModifiedDate">
+              <label for="remarksDetails" class="form-label">Remarks:</label>
+              <input type="text" class="form-control" id="remarksDetails" name="remarks">
             </div>
           </form><!-- Vertical Form -->
         </div>

@@ -3,6 +3,7 @@ package com.gu.yanzhao.controllers;
 import com.gu.yanzhao.models.Invoice;
 import com.gu.yanzhao.services.ClientService;
 import com.gu.yanzhao.services.InvoiceService;
+import com.gu.yanzhao.services.InvoiceStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +22,15 @@ public class InvoiceController {
 
     @Autowired
     private ClientService clientService;
+    
+    @Autowired
+    private InvoiceStatusService invoiceStatusService;
 
     @GetMapping("/invoice")
     public String goInvoice(Model model) {
         model.addAttribute("invoices",invoiceService.getInvoice());
         model.addAttribute("clients",clientService.getClient());
+        model.addAttribute("invoiceStatuses",invoiceStatusService.getInvoiceStatus());
         return "Invoice";
     }
 

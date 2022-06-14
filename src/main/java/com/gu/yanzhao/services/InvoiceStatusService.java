@@ -14,7 +14,7 @@ public class InvoiceStatusService {
     @Autowired
     private InvoiceStatusRepository invoiceStatusRepository;
 
-    // return list of invoiceStatuss
+    // return list of invoiceStatuses
     public List<InvoiceStatus> getInvoiceStatus() {
         return invoiceStatusRepository.findAll();
     }

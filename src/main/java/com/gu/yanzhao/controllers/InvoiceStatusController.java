@@ -20,7 +20,7 @@ public class InvoiceStatusController {
 
     @GetMapping("/invoiceStatus")
     public String goInvoiceStatus(Model model) {
-        model.addAttribute("invoiceStatuss",invoiceStatusService.getInvoiceStatus());
+        model.addAttribute("invoiceStatuses",invoiceStatusService.getInvoiceStatus());
         return "InvoiceStatus";
     }
 

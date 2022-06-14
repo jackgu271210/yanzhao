@@ -10,8 +10,8 @@ $(document).ready(function() {
             $('#selectClientEdit').val(invoice.clientid);
             var invoiceDate = invoice.invoiceDate.substr(0,10);
             $('#invoiceDateEdit').val(invoiceDate);
-            $('#selectStatusEdit').val(invoice.invoicestatusid);
-            $('#remarkEdit').val(invoice.remarks);
+            $('#selectInvoiceStatusEdit').val(invoice.invoicestatusid);
+            $('#remarksEdit').val(invoice.remarks);
         });
         myModal.show();
     });
@@ -27,8 +27,8 @@ $(document).ready(function() {
             $('#selectClientDetails').val(invoice.clientid);
             var invoiceDate = invoice.invoiceDate.substr(0,10);
             $('#invoiceDateDetails').val(invoiceDate);
-            $('#selectStatusDetails').val(invoice.invoicestatusid);
-            $('#remarkDetails').val(invoice.remarks);
+            $('#selectInvoiceStatusDetails').val(invoice.invoicestatusid);
+            $('#remarksDetails').val(invoice.remarks);
             $('#lastModifiedByDetails').val(invoice.lastModifiedBy);
             $('#lastModifiedDateDetails').val(invoice.lastModifiedDate);
         });
