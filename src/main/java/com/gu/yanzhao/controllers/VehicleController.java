@@ -46,8 +46,12 @@ public class VehicleController {
     @GetMapping("/vehicle")
     public String goVehicle(Model model) {
         model.addAttribute("vehicles",vehicleService.getVehicle());
-        model.addAttribute("countries",countryService.getCountry());
-        model.addAttribute("states",stateService.getState());
+        model.addAttribute("locations",locationService.getLocation());
+        model.addAttribute("employees",employeeService.getEmployee());
+        model.addAttribute("vehicleMakes",vehicleMakeService.getVehicleMake());
+        model.addAttribute("vehicleStatuses",vehicleStatusService.getVehicleStatus());
+        model.addAttribute("vehicleTypes",vehicleTypeService.getVehicleType());
+        model.addAttribute("vehicleModels",vehicleModelService.getVehicleModel());
         return "Vehicle";
     }
 
