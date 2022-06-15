@@ -271,10 +271,10 @@
   <!-- ======= Sidebar ======= -->
   <div th:replace="fragments/SideBar :: sidebar"></div>
 
+  <!-- ======= Main ======= -->
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>List of Countries</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -285,32 +285,50 @@
     </div><!-- End Page Title -->
 
     <section class="section">
-      <div class="row">
-        <div class="col-lg-6">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
-              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col-lg-6">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Example Card</h5>
-              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-            </div>
-          </div>
-
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">List of VehicleHires</h5>
+          <p class="card-text">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+              Add VehicleHire
+            </button>
+          </p>
+          <!-- Default Table -->
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Id</th>
+              <th>Vehicle</th>
+              <th>Date Out</th>
+              <th>Date In</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="vehicleHire : ${vehicleHires}">
+              <td th:text="${vehicleHire.id}">Id</td>
+              <td th:text="${vehicleHire.vehicle.name}">Vehicle</td>
+              <td th:text="${vehicleHire.dateOut}">Date Out</td>
+              <td th:text="${vehicleHire.dateIn}">Date In</td>
+              <td>
+                <a th:href="@{/vehicleHire/findById/(id=${vehicleHire.id})}" class="btn btn-primary" id="editButton">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+                <a th:href="@{/vehicleHire/findById/(id=${vehicleHire.id})}" class="btn btn-success" id="detailsButton">
+                  <i class="bi bi-file-earmark-richtext"></i>
+                </a>
+                <a th:href="@{/vehicleHire/delete/(id=${vehicleHire.id})}" class="btn btn-danger" id="deleteButton">
+                  <i class="bi bi-x-circle-fill"></i>
+                </a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
 
-  </main><!-- End #main -->
+  </main>
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
@@ -328,6 +346,254 @@
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+  <!-- ======= Model ======= -->
+  <div class="modal fade" id="addModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add VehicleHire</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/vehicleHire/add}" class="row g-3" method="post">
+            <div class="col-6">
+              <label for="idAdd" class="form-label">Id:</label>
+              <input type="text" class="form-control" id="idAdd" name="id" disabled>
+            </div>
+            <div class="col-6">
+              <label for="selectLocationAdd" class="form-label">Destination:</label>
+              <select class="form-select" id="selectLocationAdd" aria-label="Default select example" name="locationid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="location : ${locations}"
+                        th:value="${location.id}"
+                        th:text="${location.description}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="selectVehicleAdd" class="form-label">Vehicle:</label>
+              <select class="form-select" id="selectVehicleAdd" aria-label="Default select example" name="vehicleid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="vehicle : ${vehicles}"
+                        th:value="${vehicle.id}"
+                        th:text="${vehicle.description}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="dateInAdd" class="form-label">Date In:</label>
+              <input type="date" class="form-control" id="dateInAdd" name="dateIn" required>
+            </div>
+            <div class="col-6">
+              <label for="selectClientAdd" class="form-label">Client:</label>
+              <select class="form-select" id="selectClientAdd" aria-label="Default select example" name="clientid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="client : ${clients}"
+                        th:value="${client.id}"
+                        th:text="${client.name}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="timeInAdd" class="form-label">Time In:</label>
+              <input type="text" class="form-control" id="timeInAdd" name="timeIn" required>
+            </div>
+            <div class="col-6">
+              <label for="dateOutAdd" class="form-label">Date Out:</label>
+              <input type="date" class="form-control" id="dateOutAdd" name="dateOut" required>
+            </div>
+            <div class="col-6">
+              <label for="priceAdd" class="form-label">Price:</label>
+              <input type="text" class="form-control" id="priceAdd" name="price" required>
+            </div>
+            <div class="col-6">
+              <label for="timeOutAdd" class="form-label">Time Out:</label>
+              <input type="text" class="form-control" id="timeOutAdd" name="timeOut" required>
+            </div>
+            <div class="col-6">
+              <label for="remarksAdd" class="form-label">Remarks:</label>
+              <textarea class="form-control" id="remarksAdd" name="remarks" rows="3" required></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+          </form><!-- Vertical Form -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update VehicleHire</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/vehicleHire/update}" class="row g-3" method="put">
+            <div class="col-12">
+              <label for="idEdit" class="form-label">Id:</label>
+              <input type="text" class="form-control" id="idEdit" name="id" readonly>
+            </div>
+            <div class="col-6">
+              <label for="selectLocationEdit" class="form-label">Destination:</label>
+              <select class="form-select" id="selectLocationEdit" aria-label="Default select example" name="locationid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="location : ${locations}"
+                        th:value="${location.id}"
+                        th:text="${location.description}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="selectVehicleEdit" class="form-label">Vehicle:</label>
+              <select class="form-select" id="selectVehicleEdit" aria-label="Default select example" name="vehicleid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="vehicle : ${vehicles}"
+                        th:value="${vehicle.id}"
+                        th:text="${vehicle.description}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="dateInEdit" class="form-label">Date In:</label>
+              <input type="date" class="form-control" id="dateInEdit" name="dateIn" required>
+            </div>
+            <div class="col-6">
+              <label for="selectClientEdit" class="form-label">Client:</label>
+              <select class="form-select" id="selectClientEdit" aria-label="Default select example" name="clientid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="client : ${clients}"
+                        th:value="${client.id}"
+                        th:text="${client.name}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="timeInEdit" class="form-label">Time In:</label>
+              <input type="text" class="form-control" id="timeInEdit" name="timeIn" required>
+            </div>
+            <div class="col-6">
+              <label for="dateOutEdit" class="form-label">Date Out:</label>
+              <input type="date" class="form-control" id="dateOutEdit" name="dateOut" required>
+            </div>
+            <div class="col-6">
+              <label for="priceEdit" class="form-label">Price:</label>
+              <input type="text" class="form-control" id="priceEdit" name="price" required>
+            </div>
+            <div class="col-6">
+              <label for="timeOutEdit" class="form-label">Time Out:</label>
+              <input type="text" class="form-control" id="timeOutEdit" name="timeOut" required>
+            </div>
+            <div class="col-6">
+              <label for="remarksEdit" class="form-label">Remarks:</label>
+              <textarea class="form-control" id="remarksEdit" name="remarks" rows="3" required></textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+          </form><!-- Vertical Form -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="detailsModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">VehicleHire Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form th:action="@{/vehicleHire/update}" class="row g-3" method="put">
+            <div class="col-12">
+              <label for="idDetails" class="form-label">Id:</label>
+              <input type="text" class="form-control" id="idDetails" name="id" readonly>
+            </div>
+            <div class="col-6">
+              <label for="selectLocationDetails" class="form-label">Destination:</label>
+              <select class="form-select" id="selectLocationDetails" aria-label="Default select example" name="locationid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="location : ${locations}"
+                        th:value="${location.id}"
+                        th:text="${location.description}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="selectVehicleDetails" class="form-label">Vehicle:</label>
+              <select class="form-select" id="selectVehicleDetails" aria-label="Default select example" name="vehicleid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="vehicle : ${vehicles}"
+                        th:value="${vehicle.id}"
+                        th:text="${vehicle.description}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="dateInDetails" class="form-label">Date In:</label>
+              <input type="date" class="form-control" id="dateInDetails" name="dateIn" required>
+            </div>
+            <div class="col-6">
+              <label for="selectClientDetails" class="form-label">Client:</label>
+              <select class="form-select" id="selectClientDetails" aria-label="Default select example" name="clientid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="client : ${clients}"
+                        th:value="${client.id}"
+                        th:text="${client.name}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="timeInDetails" class="form-label">Time In:</label>
+              <input type="text" class="form-control" id="timeInDetails" name="timeIn" required>
+            </div>
+            <div class="col-6">
+              <label for="dateOutDetails" class="form-label">Date Out:</label>
+              <input type="date" class="form-control" id="dateOutDetails" name="dateOut" required>
+            </div>
+            <div class="col-6">
+              <label for="priceDetails" class="form-label">Price:</label>
+              <input type="text" class="form-control" id="priceDetails" name="price" required>
+            </div>
+            <div class="col-6">
+              <label for="timeOutDetails" class="form-label">Time Out:</label>
+              <input type="text" class="form-control" id="timeOutDetails" name="timeOut" required>
+            </div>
+            <div class="col-6">
+              <label for="remarksDetails" class="form-label">Remarks:</label>
+              <textarea class="form-control" id="remarksDetails" name="remarks" rows="3" required></textarea>
+            </div>
+          </form><!-- Vertical Form -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Delete</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this record?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" id="confirmDeleteButton">Yes, Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/jquery-3.6.0.min.js"></script>
+
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -340,6 +606,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/vehicleHire.js"></script>
 
 </body>
 

@@ -5,18 +5,19 @@ $(document).ready(function() {
             keyboard: false
         });
         var href = $(this).attr('href');
-        $.get(href,function(client,status) {
-            $('#idEdit').val(client.id);
-            $('#nameEdit').val(client.name);
-            $('#detailsEdit').val(client.details);
-            $('#websiteEdit').val(client.website);
-            $('#addressEdit').val(client.address);
-            $('#emailEdit').val(client.email);
-            $('#selectStateEdit').val(client.stateid);
-            $('#selectCountryEdit').val(client.countryid);
-            $('#cityEdit').val(client.city);
-            $('#phoneEdit').val(client.phone);
-            $('#mobileEdit').val(client.mobile);
+        $.get(href,function(vehicleMaintenance,status) {
+            $('#idEdit').val(vehicleMaintenance.id);
+            $('#priceEdit').val(vehicleMaintenance.price);
+            $('#remarksEdit').val(vehicleMaintenance.remarks);
+            $('#selectSupplierEdit').val(vehicleMaintenance.supplierid);
+            $('#selectVehicleEdit').val(vehicleMaintenance.vehicleid);
+            
+            // Create a date variable and extract only the date part of the field
+            var startDate = vehicleMaintenance.startDate.substr(0,10);
+            var endDate = vehicleMaintenance.endDate.substr(0,10);
+            
+            $('#startDateEdit').val(startDate);
+            $('#endDateEdit').val(endDate);
         });
         myModal.show();
     });
@@ -27,18 +28,18 @@ $(document).ready(function() {
             keyboard: false
         });
         var href = $(this).attr('href');
-        $.get(href,function(client,status) {
-            $('#idDetails').val(client.id);
-            $('#nameDetails').val(client.name);
-            $('#details').val(client.details);
-            $('#websiteDetails').val(client.website);
-            $('#addressDetails').val(client.address);
-            $('#emailDetails').val(client.email);
-            $('#selectStateDetails').val(client.stateid);
-            $('#selectCountryDetails').val(client.countryid);
-            $('#cityDetails').val(client.city);
-            $('#phoneDetails').val(client.phone);
-            $('#mobileDetails').val(client.mobile);
+        $.get(href,function(vehicleMaintenance,status) {
+            $('#idDetails').val(vehicleMaintenance.id);
+            $('#priceDetails').val(vehicleMaintenance.price);
+            $('#remarksDetails').val(vehicleMaintenance.remarks);
+            $('#selectSupplierDetails').val(vehicleMaintenance.supplierid);
+            $('#selectVehicleDetails').val(vehicleMaintenance.vehicleid);
+            
+            var startDate = vehicleMaintenance.startDate.substr(0,10);
+            var endDate = vehicleMaintenance.endDate.substr(0,10);
+            
+            $('#startDateDetails').val(startDate);
+            $('#endDateDetails').val(endDate);
         });
         myModal.show();
     });
