@@ -298,15 +298,15 @@
             <thead>
             <tr>
               <th>Id</th>
-              <th>Name</th>
+              <th>Description</th>
               <th>Details</th>
-              <th>Actions</th>
+              <th>Action</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="jobTitle : ${jobTitles}">
               <td th:text="${jobTitle.id}">Id</td>
-              <td th:text="${jobTitle.name}">Name</td>
+              <td th:text="${jobTitle.description}">Description</td>
               <td th:text="${jobTitle.details}">Details</td>
               <td>
                 <a th:href="@{/jobTitle/findById/(id=${jobTitle.id})}" class="btn btn-primary" id="editButton">
@@ -354,31 +354,13 @@
         </div>
         <div class="modal-body">
           <form th:action="@{/jobTitle/add}" class="row g-3" method="post">
-            <!--            <div class="col-12">-->
-            <!--              <label for="idAdd" class="form-label">Id:</label>-->
-            <!--              <input type="text" class="form-control" id="idAdd" name="id" readonly>-->
-            <!--            </div>-->
             <div class="col-12">
-              <label for="selectJobTitleAdd" class="form-label">Country:</label>
-              <select class="form-select" id="selectJobTitleAdd" aria-label="Default select example" name="countryid" required>
-                <option selected>-SELECT-</option>
-                <option th:each="country : ${countries}"
-                        th:value="${country.id}"
-                        th:text="${country.description}"
-                ></option>
-              </select>
+              <label for="idAdd" class="form-label">Id:</label>
+              <input type="text" class="form-control" id="idAdd" name="id" disabled>
             </div>
             <div class="col-12">
-              <label for="nameAdd" class="form-label">Description:</label>
-              <input type="text" class="form-control" id="nameAdd" name="name" required>
-            </div>
-            <div class="col-12">
-              <label for="codeAdd" class="form-label">Code:</label>
-              <input type="text" class="form-control" id="codeAdd" name="code" required>
-            </div>
-            <div class="col-12">
-              <label for="capitalAdd" class="form-label">Capital:</label>
-              <input type="text" class="form-control" id="capitalAdd" name="capital" required>
+              <label for="descriptionAdd" class="form-label">Description:</label>
+              <input type="text" class="form-control" id="descriptionAdd" name="description" required>
             </div>
             <div class="col-12">
               <label for="detailsAdd" class="form-label">Details:</label>
@@ -408,26 +390,8 @@
               <input type="text" class="form-control" id="idEdit" name="id" readonly>
             </div>
             <div class="col-12">
-              <label for="selectCountryEdit" class="form-label">Description:</label>
-              <select class="form-select" id="selectCountryEdit" aria-label="Default select example" name="countryid" required>
-                <option selected>-SELECT-</option>
-                <option th:each="country : ${countries}"
-                        th:value="${country.id}"
-                        th:text="${country.description}"
-                ></option>
-              </select>
-            </div>
-            <div class="col-12">
-              <label for="nameEdit" class="form-label">Description:</label>
-              <input type="text" class="form-control" id="nameEdit" name="name" required>
-            </div>
-            <div class="col-12">
-              <label for="codeEdit" class="form-label">Code:</label>
-              <input type="text" class="form-control" id="codeEdit" name="code" required>
-            </div>
-            <div class="col-12">
-              <label for="capitalEdit" class="form-label">Capital:</label>
-              <input type="text" class="form-control" id="capitalEdit" name="capital" required>
+              <label for="descriptionEdit" class="form-label">Description:</label>
+              <input type="text" class="form-control" id="descriptionEdit" name="description" required>
             </div>
             <div class="col-12">
               <label for="detailsEdit" class="form-label">Details:</label>
@@ -457,38 +421,12 @@
               <input type="text" class="form-control" id="idDetails" name="id" readonly>
             </div>
             <div class="col-12">
-              <label for="countryDetails" class="form-label">Description:</label>
-              <select class="form-select" id="countryDetails" aria-label="Default select example" name="countryid">
-                <option selected>-SELECT-</option>
-                <option th:each="country : ${countries}"
-                        th:value="${country.id}"
-                        th:text="${country.description}"
-                ></option>
-              </select>
+              <label for="descriptionDetails" class="form-label">Description:</label>
+              <input type="text" class="form-control" id="descriptionDetails" name="description" required>
             </div>
             <div class="col-12">
-              <label for="nameDetails" class="form-label">Description:</label>
-              <input type="text" class="form-control" id="nameDetails" name="name">
-            </div>
-            <div class="col-12">
-              <label for="codeDetails" class="form-label">Code:</label>
-              <input type="text" class="form-control" id="codeDetails" name="code">
-            </div>
-            <div class="col-12">
-              <label for="capitalDetails" class="form-label">Continent:</label>
-              <input type="text" class="form-control" id="capitalDetails" name="capital">
-            </div>
-            <div class="col-12">
-              <label for="details" class="form-label">Nationality:</label>
-              <input type="text" class="form-control" id="details" name="details">
-            </div>
-            <div class="col-12">
-              <label for="lastModifiedByDetails" class="form-label">Last Updated By:</label>
-              <input type="text" class="form-control" id="lastModifiedByDetails" name="lastModifiedBy">
-            </div>
-            <div class="col-12">
-              <label for="lastModifiedDateDetails" class="form-label">Last Updated On:</label>
-              <input type="text" class="form-control" id="lastModifiedDateDetails" name="lastModifiedDate">
+              <label for="details" class="form-label">Details:</label>
+              <input type="text" class="form-control" id="details" name="details" required>
             </div>
           </form><!-- Vertical Form -->
         </div>

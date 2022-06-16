@@ -22,6 +22,7 @@ $(document).ready(function() {
         $.get(href,function(employeeType,status) {
             $('#idDetails').val(employeeType.id);
             $('#descriptionDetails').val(employeeType.description);
+            $('#details').val(employeeType.details);
             $('#lastModifiedByDetails').val(employeeType.lastModifiedBy);
             $('#lastModifiedDateDetails').val(employeeType.lastModifiedDate);
         });
