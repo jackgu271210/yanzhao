@@ -1,9 +1,8 @@
 package com.gu.yanzhao.controllers;
 
 import com.gu.yanzhao.models.Employee;
-import com.gu.yanzhao.services.EmployeeService;
-import com.gu.yanzhao.services.CountryService;
-import com.gu.yanzhao.services.StateService;
+import com.gu.yanzhao.models.JobTitle;
+import com.gu.yanzhao.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +20,12 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @Autowired
+    private JobTitleService jobTitleService;
+
+    @Autowired
+    private EmployeeTypeService employeeTypeService;
+
+    @Autowired
     private CountryService countryService;
 
     @Autowired
@@ -29,6 +34,8 @@ public class EmployeeController {
     @GetMapping("/employee")
     public String goEmployee(Model model) {
         model.addAttribute("employees",employeeService.getEmployee());
+        model.addAttribute("jobTitles",jobTitleService.getJobTitle());
+        model.addAttribute("employeeTypes",employeeTypeService.getEmployeeType());
         model.addAttribute("countries",countryService.getCountry());
         model.addAttribute("states",stateService.getState());
         return "Employee";

@@ -297,17 +297,25 @@
           <table class="table table-striped">
             <thead>
             <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Details</th>
-              <th>Actions</th>
+              <th>Full Name</th>
+              <th>Hire Name</th>
+              <th>Email</th>
+              <th>City</th>
+              <th>Phone</th>
+              <th>Action</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="employee : ${employees}">
-              <td th:text="${employee.id}">Id</td>
-              <td th:text="${employee.name}">Name</td>
-              <td th:text="${employee.details}">Details</td>
+              <td>
+                <a th:href="@{'/img/photos/' + ${employee.username} + '.jpg'}"></a>
+                <img th:src="@{'/img/photos/' + ${employee.username} + '.jpg'}" width="40" height="40">
+              </td>
+              <td th:text="${employee.firstname} + ' ' + ${employee.lastname}">Fullname</td>
+              <td th:text="${employee.hireDate}">HireDate</td>
+              <td th:text="${employee.email}">Email</td>
+              <td th:text="${employee.city}">City</td>
+              <td th:text="${employee.phone}">Phone</td>
               <td>
                 <a th:href="@{/employee/findById/(id=${employee.id})}" class="btn btn-primary" id="editButton">
                   <i class="bi bi-pencil-square"></i>
@@ -354,35 +362,121 @@
         </div>
         <div class="modal-body">
           <form th:action="@{/employee/add}" class="row g-3" method="post">
-            <!--            <div class="col-12">-->
-            <!--              <label for="idAdd" class="form-label">Id:</label>-->
-            <!--              <input type="text" class="form-control" id="idAdd" name="id" readonly>-->
-            <!--            </div>-->
-            <div class="col-12">
-              <label for="selectEmployeeAdd" class="form-label">Country:</label>
-              <select class="form-select" id="selectEmployeeAdd" aria-label="Default select example" name="countryid" required>
+            <div class="col-6">
+              <label for="idAdd" class="form-label">Id:</label>
+              <input type="text" class="form-control" id="idAdd" name="id" disabled>
+            </div>
+            <div class="col-6">
+              <label for="dateOfBirthAdd" class="form-label">Date of Birth:</label>
+              <input type="date" class="form-control" id="dateOfBirthAdd" name="DateOfBirth" required>
+            </div>
+            <div class="col-6">
+              <label for="selectTitleAdd" class="form-label">Title:</label>
+              <select class="form-select" id="selectTitleAdd" aria-label="Default select example" name="title" required>
+                <option selected>-SELECT-</option>
+                <option value="MALE">Mr.</option>
+                <option value="FEMAL">Ms.</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="hireDateAdd" class="form-label">Hire Date:</label>
+              <input type="date" class="form-control" id="hireDateAdd" name="hireDate" required>
+            </div>
+            <div class="col-6">
+              <label for="initialsAdd" class="form-label">Initials:</label>
+              <input type="text" class="form-control" id="initialsAdd" name="initials" required>
+            </div>
+            <div class="col-6">
+              <label for="selectStateAdd" class="form-label">State/Province:</label>
+              <select class="form-select" id="selectStateAdd" aria-label="Default select example" name="stateid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="state : ${states}"
+                        th:value="${state.id}"
+                        th:text="${state.name}">
+                </option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="SSNAdd" class="form-label">Social Security No.:</label>
+              <input type="text" class="form-control" id="SSNAdd" name="socialSecurityNumber" required>
+            </div>
+            <div class="col-6">
+              <label for="cityAdd" class="form-label">City:</label>
+              <input type="text" class="form-control" id="cityAdd" name="city" required>
+            </div>
+            <div class="col-6">
+              <label for="firstNameAdd" class="form-label">Firstname:</label>
+              <input type="text" class="form-control" id="firstNameAdd" name="firstname" required>
+            </div>
+            <div class="col-6">
+              <label for="phoneAdd" class="form-label">Phone:</label>
+              <input type="text" class="form-control" id="phoneAdd" name="phone" required>
+            </div>
+            <div class="col-6">
+              <label for="lastNameAdd" class="form-label">Lastname:</label>
+              <input type="text" class="form-control" id="lastNameAdd" name="lastname" required>
+            </div>
+            <div class="col-6">
+              <label for="mobileAdd" class="form-label">Mobile:</label>
+              <input type="text" class="form-control" id="mobileAdd" name="mobile" required>
+            </div>
+            <div class="col-6">
+              <label for="otherNameAdd" class="form-label">Othername:</label>
+              <input type="text" class="form-control" id="otherNameAdd" name="othername" required>
+            </div>
+            <div class="col-6">
+              <label for="selectMaritalStatusAdd" class="form-label">Marital Status:</label>
+              <select class="form-select" id="selectMaritalStatusAdd" aria-label="Default select example" name="maritalStatus" required>
+                <option selected>-SELECT-</option>
+                <option value="orange">Married</option>
+                <option value="pear">Single</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="selectGenderAdd" class="form-label">Gender:</label>
+              <select class="form-select" id="selectGenderAdd" aria-label="Default select example" name="gender" required>
+                <option selected>-SELECT-</option>
+                <option value="MALE">MALE</option>
+                <option value="FEMAL">FEMALE.</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="emailAdd" class="form-label">Email:</label>
+              <input type="text" class="form-control" id="emailAdd" name="email" required>
+            </div>
+            <div class="col-6">
+              <label for="selectNationalityAdd" class="form-label">Nationality:</label>
+              <select class="form-select" id="selectNationalityAdd" aria-label="Default select example" name="countryid" required>
                 <option selected>-SELECT-</option>
                 <option th:each="country : ${countries}"
                         th:value="${country.id}"
-                        th:text="${country.description}"
-                ></option>
+                        th:text="${country.description}">
+                </option>
               </select>
             </div>
-            <div class="col-12">
-              <label for="nameAdd" class="form-label">Description:</label>
-              <input type="text" class="form-control" id="nameAdd" name="name" required>
+            <div class="col-6">
+              <label for="selectJobTitleAdd" class="form-label">Job Title:</label>
+              <select class="form-select" id="selectJobTitleAdd" aria-label="Default select example" name="jobTitleId" required>
+                <option selected>-SELECT-</option>
+                <option th:each="jobTitle : ${jobTitles}"
+                        th:value="${jobTitle.id}"
+                        th:text="${jobTitle.description}">
+                </option>
+              </select>
             </div>
-            <div class="col-12">
-              <label for="codeAdd" class="form-label">Code:</label>
-              <input type="text" class="form-control" id="codeAdd" name="code" required>
+            <div class="col-6">
+              <label for="addressAdd" class="form-label">Address:</label>
+              <textarea class="form-control" id="addressAdd" name="address" rows="2" required></textarea>
             </div>
-            <div class="col-12">
-              <label for="capitalAdd" class="form-label">Capital:</label>
-              <input type="text" class="form-control" id="capitalAdd" name="capital" required>
-            </div>
-            <div class="col-12">
-              <label for="detailsAdd" class="form-label">Details:</label>
-              <input type="text" class="form-control" id="detailsAdd" name="details" required>
+            <div class="col-6">
+              <label for="selectEmployeeTypeAdd" class="form-label">Employee Type:</label>
+              <select class="form-select" id="selectEmployeeTypeAdd" aria-label="Default select example" name="employeeTypeId" required>
+                <option selected>-SELECT-</option>
+                <option th:each="employeeType : ${employeeTypes}"
+                        th:value="${employeeType.id}"
+                        th:text="${employeeType.description}">
+                </option>
+              </select>
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -403,35 +497,121 @@
         </div>
         <div class="modal-body">
           <form th:action="@{/employee/update}" class="row g-3" method="put">
-            <div class="col-12">
+            <div class="col-6">
               <label for="idEdit" class="form-label">Id:</label>
               <input type="text" class="form-control" id="idEdit" name="id" readonly>
             </div>
-            <div class="col-12">
-              <label for="selectCountryEdit" class="form-label">Description:</label>
-              <select class="form-select" id="selectCountryEdit" aria-label="Default select example" name="countryid" required>
+            <div class="col-6">
+              <label for="dateOfBirthEdit" class="form-label">Date of Birth:</label>
+              <input type="date" class="form-control" id="dateOfBirthEdit" name="DateOfBirth" required>
+            </div>
+            <div class="col-6">
+              <label for="selectTitleEdit" class="form-label">Title:</label>
+              <select class="form-select" id="selectTitleEdit" aria-label="Default select example" name="title" required>
+                <option selected>-SELECT-</option>
+                <option value="MALE">Mr.</option>
+                <option value="FEMAL">Ms.</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="hireDateEdit" class="form-label">Hire Date:</label>
+              <input type="date" class="form-control" id="hireDateEdit" name="hireDate" required>
+            </div>
+            <div class="col-6">
+              <label for="initialsEdit" class="form-label">Initials:</label>
+              <input type="text" class="form-control" id="initialsEdit" name="initials" required>
+            </div>
+            <div class="col-6">
+              <label for="selectStateEdit" class="form-label">State/Province:</label>
+              <select class="form-select" id="selectStateEdit" aria-label="Default select example" name="stateid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="state : ${states}"
+                        th:value="${state.id}"
+                        th:text="${state.name}">
+                </option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="SSNEdit" class="form-label">Social Security No.:</label>
+              <input type="text" class="form-control" id="SSNEdit" name="socialSecurityNumber" required>
+            </div>
+            <div class="col-6">
+              <label for="cityEdit" class="form-label">City:</label>
+              <input type="text" class="form-control" id="cityEdit" name="city" required>
+            </div>
+            <div class="col-6">
+              <label for="firstNameEdit" class="form-label">Firstname:</label>
+              <input type="text" class="form-control" id="firstNameEdit" name="firstname" required>
+            </div>
+            <div class="col-6">
+              <label for="phoneEdit" class="form-label">Phone:</label>
+              <input type="text" class="form-control" id="phoneEdit" name="phone" required>
+            </div>
+            <div class="col-6">
+              <label for="lastNameEdit" class="form-label">Lastname:</label>
+              <input type="text" class="form-control" id="lastNameEdit" name="lastname" required>
+            </div>
+            <div class="col-6">
+              <label for="mobileEdit" class="form-label">Mobile:</label>
+              <input type="text" class="form-control" id="mobileEdit" name="mobile" required>
+            </div>
+            <div class="col-6">
+              <label for="otherNameEdit" class="form-label">Othername:</label>
+              <input type="text" class="form-control" id="otherNameEdit" name="othername" required>
+            </div>
+            <div class="col-6">
+              <label for="selectMaritalStatusEdit" class="form-label">Marital Status:</label>
+              <select class="form-select" id="selectMaritalStatusEdit" aria-label="Default select example" name="maritalStatus" required>
+                <option selected>-SELECT-</option>
+                <option value="orange">Married</option>
+                <option value="pear">Single</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="selectGenderEdit" class="form-label">Gender:</label>
+              <select class="form-select" id="selectGenderEdit" aria-label="Default select example" name="gender" required>
+                <option selected>-SELECT-</option>
+                <option value="MALE">MALE</option>
+                <option value="FEMAL">FEMALE.</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="emailEdit" class="form-label">Email:</label>
+              <input type="text" class="form-control" id="emailEdit" name="email" required>
+            </div>
+            <div class="col-6">
+              <label for="selectNationalityEdit" class="form-label">Nationality:</label>
+              <select class="form-select" id="selectNationalityEdit" aria-label="Default select example" name="countryid" required>
                 <option selected>-SELECT-</option>
                 <option th:each="country : ${countries}"
                         th:value="${country.id}"
-                        th:text="${country.description}"
-                ></option>
+                        th:text="${country.description}">
+                </option>
               </select>
             </div>
-            <div class="col-12">
-              <label for="nameEdit" class="form-label">Description:</label>
-              <input type="text" class="form-control" id="nameEdit" name="name" required>
+            <div class="col-6">
+              <label for="selectJobTitleEdit" class="form-label">Job Title:</label>
+              <select class="form-select" id="selectJobTitleEdit" aria-label="Default select example" name="jobTitleId" required>
+                <option selected>-SELECT-</option>
+                <option th:each="jobTitle : ${jobTitles}"
+                        th:value="${jobTitle.id}"
+                        th:text="${jobTitle.description}">
+                </option>
+              </select>
             </div>
-            <div class="col-12">
-              <label for="codeEdit" class="form-label">Code:</label>
-              <input type="text" class="form-control" id="codeEdit" name="code" required>
+            <div class="col-6">
+              <label for="addressEdit" class="form-label">Address:</label>
+              <textarea class="form-control" id="addressEdit" name="address" rows="2" required></textarea>
             </div>
-            <div class="col-12">
-              <label for="capitalEdit" class="form-label">Capital:</label>
-              <input type="text" class="form-control" id="capitalEdit" name="capital" required>
-            </div>
-            <div class="col-12">
-              <label for="detailsEdit" class="form-label">Details:</label>
-              <input type="text" class="form-control" id="detailsEdit" name="details" required>
+            <div class="col-6">
+              <label for="selectEmployeeTypeEdit" class="form-label">Employee Type:</label>
+              <select class="form-select" id="selectEmployeeTypeEdit" aria-label="Default select example" name="employeeTypeId" required>
+                <option selected>-SELECT-</option>
+                <option th:each="employeeType : ${employeeTypes}"
+                        th:value="${employeeType.id}"
+                        th:text="${employeeType.description}">
+                </option>
+              </select>
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -456,39 +636,117 @@
               <label for="idDetails" class="form-label">Id:</label>
               <input type="text" class="form-control" id="idDetails" name="id" readonly>
             </div>
-            <div class="col-12">
-              <label for="countryDetails" class="form-label">Description:</label>
-              <select class="form-select" id="countryDetails" aria-label="Default select example" name="countryid">
+            <div class="col-6">
+              <label for="dateOfBirthDetails" class="form-label">Date of Birth:</label>
+              <input type="date" class="form-control" id="dateOfBirthDetails" name="DateOfBirth" required>
+            </div>
+            <div class="col-6">
+              <label for="selectTitleDetails" class="form-label">Title:</label>
+              <select class="form-select" id="selectTitleDetails" aria-label="Default select example" name="title" required>
+                <option selected>-SELECT-</option>
+                <option value="MALE">Mr.</option>
+                <option value="FEMAL">Ms.</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="hireDateDetails" class="form-label">Hire Date:</label>
+              <input type="date" class="form-control" id="hireDateDetails" name="hireDate" required>
+            </div>
+            <div class="col-6">
+              <label for="initialsDetails" class="form-label">Initials:</label>
+              <input type="text" class="form-control" id="initialsDetails" name="initials" required>
+            </div>
+            <div class="col-6">
+              <label for="selectStateDetails" class="form-label">State/Province:</label>
+              <select class="form-select" id="selectStateDetails" aria-label="Default select example" name="stateid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="state : ${states}"
+                        th:value="${state.id}"
+                        th:text="${state.name}">
+                </option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="SSNDetails" class="form-label">Social Security No.:</label>
+              <input type="text" class="form-control" id="SSNDetails" name="socialSecurityNumber" required>
+            </div>
+            <div class="col-6">
+              <label for="cityDetails" class="form-label">City:</label>
+              <input type="text" class="form-control" id="cityDetails" name="city" required>
+            </div>
+            <div class="col-6">
+              <label for="firstNameDetails" class="form-label">Firstname:</label>
+              <input type="text" class="form-control" id="firstNameDetails" name="firstname" required>
+            </div>
+            <div class="col-6">
+              <label for="phoneDetails" class="form-label">Phone:</label>
+              <input type="text" class="form-control" id="phoneDetails" name="phone" required>
+            </div>
+            <div class="col-6">
+              <label for="lastNameDetails" class="form-label">Lastname:</label>
+              <input type="text" class="form-control" id="lastNameDetails" name="lastname" required>
+            </div>
+            <div class="col-6">
+              <label for="mobileDetails" class="form-label">Mobile:</label>
+              <input type="text" class="form-control" id="mobileDetails" name="mobile" required>
+            </div>
+            <div class="col-6">
+              <label for="otherNameDetails" class="form-label">Othername:</label>
+              <input type="text" class="form-control" id="otherNameDetails" name="othername" required>
+            </div>
+            <div class="col-6">
+              <label for="selectMaritalStatusDetails" class="form-label">Marital Status:</label>
+              <select class="form-select" id="selectMaritalStatusDetails" aria-label="Default select example" name="maritalStatus" required>
+                <option selected>-SELECT-</option>
+                <option value="orange">Married</option>
+                <option value="pear">Single</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="selectGenderDetails" class="form-label">Gender:</label>
+              <select class="form-select" id="selectGenderDetails" aria-label="Default select example" name="gender" required>
+                <option selected>-SELECT-</option>
+                <option value="MALE">MALE</option>
+                <option value="FEMAL">FEMALE.</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="emailDetails" class="form-label">Email:</label>
+              <input type="text" class="form-control" id="emailDetails" name="email" required>
+            </div>
+            <div class="col-6">
+              <label for="selectNationalityDetails" class="form-label">Nationality:</label>
+              <select class="form-select" id="selectNationalityDetails" aria-label="Default select example" name="countryid" required>
                 <option selected>-SELECT-</option>
                 <option th:each="country : ${countries}"
                         th:value="${country.id}"
-                        th:text="${country.description}"
-                ></option>
+                        th:text="${country.description}">
+                </option>
               </select>
             </div>
-            <div class="col-12">
-              <label for="nameDetails" class="form-label">Description:</label>
-              <input type="text" class="form-control" id="nameDetails" name="name">
+            <div class="col-6">
+              <label for="selectJobTitleDetails" class="form-label">Job Title:</label>
+              <select class="form-select" id="selectJobTitleDetails" aria-label="Default select example" name="jobTitleId" required>
+                <option selected>-SELECT-</option>
+                <option th:each="jobTitle : ${jobTitles}"
+                        th:value="${jobTitle.id}"
+                        th:text="${jobTitle.description}">
+                </option>
+              </select>
             </div>
-            <div class="col-12">
-              <label for="codeDetails" class="form-label">Code:</label>
-              <input type="text" class="form-control" id="codeDetails" name="code">
+            <div class="col-6">
+              <label for="addressDetails" class="form-label">Address:</label>
+              <textarea class="form-control" id="addressDetails" name="address" rows="2" required></textarea>
             </div>
-            <div class="col-12">
-              <label for="capitalDetails" class="form-label">Continent:</label>
-              <input type="text" class="form-control" id="capitalDetails" name="capital">
-            </div>
-            <div class="col-12">
-              <label for="details" class="form-label">Nationality:</label>
-              <input type="text" class="form-control" id="details" name="details">
-            </div>
-            <div class="col-12">
-              <label for="lastModifiedByDetails" class="form-label">Last Updated By:</label>
-              <input type="text" class="form-control" id="lastModifiedByDetails" name="lastModifiedBy">
-            </div>
-            <div class="col-12">
-              <label for="lastModifiedDateDetails" class="form-label">Last Updated On:</label>
-              <input type="text" class="form-control" id="lastModifiedDateDetails" name="lastModifiedDate">
+            <div class="col-6">
+              <label for="selectEmployeeTypeDetails" class="form-label">Employee Type:</label>
+              <select class="form-select" id="selectEmployeeTypeDetails" aria-label="Default select example" name="employeeTypeId" required>
+                <option selected>-SELECT-</option>
+                <option th:each="employeeType : ${employeeTypes}"
+                        th:value="${employeeType.id}"
+                        th:text="${employeeType.description}">
+                </option>
+              </select>
             </div>
           </form><!-- Vertical Form -->
         </div>

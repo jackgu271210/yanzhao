@@ -405,21 +405,56 @@
                         th:text="${vehicleModel.description}"
                 ></option>
               </select>
-              
-              //改到这里
-              
             </div>
             <div class="col-6">
-              <label for="addressAdd" class="form-label">Address:</label>
-              <input type="text" class="form-control" id="addressAdd" name="address" required>
+              <label for="selectCurrentLocationAdd" class="form-label">Current Location:</label>
+              <select class="form-select" id="selectCurrentLocationAdd" aria-label="Default select example" name="locationid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="location : ${locations}"
+                        th:value="${location.id}"
+                        th:text="${location.description}"
+                ></option>
+              </select>
             </div>
             <div class="col-6">
-              <label for="mobileAdd" class="form-label">Mobile:</label>
-              <input type="text" class="form-control" id="mobileAdd" name="mobile" required>
+              <label for="powerAdd" class="form-label">Power:</label>
+              <input type="text" class="form-control" id="powerAdd" name="power" required>
             </div>
             <div class="col-6">
-              <label for="emailAdd" class="form-label">Email:</label>
-              <input type="text" class="form-control" id="emailAdd" name="email" required>
+              <label for="fuelCapacityAdd" class="form-label">Fuel Capacity:</label>
+              <input type="text" class="form-control" id="fuelCapacityAdd" name="fuelCapacity" required>
+            </div>
+            <div class="col-6">
+              <label for="netWeightAdd" class="form-label">Net Weight:</label>
+              <input type="text" class="form-control" id="netWeightAdd" name="netWeight" required>
+            </div>
+            <div class="col-6">
+              <label for="remarksAdd" class="form-label">Remarks:</label>
+              <textarea type="text" class="form-control" id="remarksAdd" name="remarks" rows="2" required></textarea>
+            </div>
+            <div class="col-6">
+              <label for="selectEmployeeAdd" class="form-label">In Charge:</label>
+              <select class="form-select" id="selectEmployeeAdd" aria-label="Default select example" name="employeeid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="employee : ${employees}"
+                        th:value="${employee.id}"
+                        th:text="${employee.firstname}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="selectCurrentStatusAdd" class="form-label">Current Status:</label>
+              <select class="form-select" id="selectCurrentStatusAdd" aria-label="Default select example" name="vehiclestatusid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="vehicleStatus : ${vehicleStatuses}"
+                        th:value="${vehicleStatus.id}"
+                        th:text="${vehicleStatus.description}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="flpImageAdd" class="form-label">Select Image:</label>
+              <input type="file" class="form-control" id="flpImageAdd" name="photo" required>
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -441,60 +476,104 @@
         <div class="modal-body">
           <form th:action="@{/vehicle/update}" class="row g-3" method="put">
             <div class="col-6">
-              <label for="idEdit" class="form-label">Id:</label>
-              <input type="text" class="form-control" id="idEdit" name="id" readonly>
-            </div>
-            <div class="col-6">
-              <label for="selectStateEdit" class="form-label">State/Province:</label>
-              <select class="form-select" id="selectStateEdit" aria-label="Default select example" name="stateid" required>
+              <label for="selectVehicleTypeEdit" class="form-label">Vehicle Type:</label>
+              <select class="form-select" id="selectVehicleTypeEdit" aria-label="Default select example" name="vehicletypeid" required>
                 <option selected>-SELECT-</option>
-                <option th:each="state : ${states}"
-                        th:value="${state.id}"
-                        th:text="${state.name}"
+                <option th:each="vehicleType : ${vehicleTypes}"
+                        th:value="${vehicleType.id}"
+                        th:text="${vehicleType.description}"
                 ></option>
               </select>
             </div>
             <div class="col-6">
-              <label for="nameEdit" class="form-label">Name:</label>
-              <input type="text" class="form-control" id="nameEdit" name="name" required>
+              <label for="vehicleNameEdit" class="form-label">Vehicle Name:</label>
+              <input type="text" class="form-control" id="vehicleNameEdit" name="name" required>
             </div>
             <div class="col-6">
-              <label for="selectCountryEdit" class="form-label">Country:</label>
-              <select class="form-select" id="selectCountryEdit" aria-label="Default select example" name="countryid" required>
+              <label for="vehicleNumberEdit" class="form-label">Vehicle Number:</label>
+              <input type="text" class="form-control" id="vehicleNumberEdit" name="vehicleNumber" required>
+            </div>
+            <div class="col-6">
+              <label for="registrationDateEdit" class="form-label">Registration Date:</label>
+              <input type="date" class="form-control" id="registrationDateEdit" name="registrationDate" required>
+            </div>
+            <div class="col-6">
+              <label for="descriptionEdit" class="form-label">Description:</label>
+              <input type="text" class="form-control" id="descriptionEdit" name="description" required>
+            </div>
+            <div class="col-6">
+              <label for="acquisitionDateEdit" class="form-label">Acquisition Date:</label>
+              <input type="date" class="form-control" id="acquisitionDateEdit" name="acquisitionDate" required>
+            </div>
+            <div class="col-6">
+              <label for="selectVehicleMakeEdit" class="form-label">Vehicle Make:</label>
+              <select class="form-select" id="selectVehicleMakeEdit" aria-label="Default select example" name="vehiclemakeid" required>
                 <option selected>-SELECT-</option>
-                <option th:each="country : ${countries}"
-                        th:value="${country.id}"
-                        th:text="${country.description}"
+                <option th:each="vehicleMake : ${vehicleMakes}"
+                        th:value="${vehicleMake.id}"
+                        th:text="${vehicleMake.description}"
                 ></option>
               </select>
             </div>
             <div class="col-6">
-              <label for="detailsEdit" class="form-label">Details:</label>
-              <input type="text" class="form-control" id="detailsEdit" name="details" required>
+              <label for="selectVehicleModelEdit" class="form-label">Vehicle Model:</label>
+              <select class="form-select" id="selectVehicleModelEdit" aria-label="Default select example" name="vehiclemodelid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="vehicleModel : ${vehicleModels}"
+                        th:value="${vehicleModel.id}"
+                        th:text="${vehicleModel.description}"
+                ></option>
+              </select>
             </div>
             <div class="col-6">
-              <label for="cityEdit" class="form-label">City:</label>
-              <input type="text" class="form-control" id="cityEdit" name="city" required>
+              <label for="selectCurrentLocationEdit" class="form-label">Current Location:</label>
+              <select class="form-select" id="selectCurrentLocationEdit" aria-label="Default select example" name="locationid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="location : ${locations}"
+                        th:value="${location.id}"
+                        th:text="${location.description}"
+                ></option>
+              </select>
             </div>
             <div class="col-6">
-              <label for="websiteEdit" class="form-label">Website:</label>
-              <input type="text" class="form-control" id="websiteEdit" name="website" required>
+              <label for="powerEdit" class="form-label">Power:</label>
+              <input type="text" class="form-control" id="powerEdit" name="power" required>
             </div>
             <div class="col-6">
-              <label for="phoneEdit" class="form-label">Phone:</label>
-              <input type="text" class="form-control" id="phoneEdit" name="phone" required>
+              <label for="fuelCapacityEdit" class="form-label">Fuel Capacity:</label>
+              <input type="text" class="form-control" id="fuelCapacityEdit" name="fuelCapacity" required>
             </div>
             <div class="col-6">
-              <label for="addressEdit" class="form-label">Address:</label>
-              <input type="text" class="form-control" id="addressEdit" name="address" required>
+              <label for="netWeightEdit" class="form-label">Net Weight:</label>
+              <input type="text" class="form-control" id="netWeightEdit" name="netWeight" required>
             </div>
             <div class="col-6">
-              <label for="mobileEdit" class="form-label">Mobile:</label>
-              <input type="text" class="form-control" id="mobileEdit" name="mobile" required>
+              <label for="remarksEdit" class="form-label">Remarks:</label>
+              <textarea type="text" class="form-control" id="remarksEdit" name="remarks" rows="2" required></textarea>
             </div>
             <div class="col-6">
-              <label for="emailEdit" class="form-label">Email:</label>
-              <input type="text" class="form-control" id="emailEdit" name="email" required>
+              <label for="selectEmployeeEdit" class="form-label">In Charge:</label>
+              <select class="form-select" id="selectEmployeeEdit" aria-label="Default select example" name="employeeid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="employee : ${employees}"
+                        th:value="${employee.id}"
+                        th:text="${employee.firstname}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="selectCurrentStatusEdit" class="form-label">Current Status:</label>
+              <select class="form-select" id="selectCurrentStatusEdit" aria-label="Default select example" name="vehiclestatusid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="vehicleStatus : ${vehicleStatuses}"
+                        th:value="${vehicleStatus.id}"
+                        th:text="${vehicleStatus.description}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="flpImageEdit" class="form-label">Select Image:</label>
+              <input type="file" class="form-control" id="flpImageEdit" name="photo" required>
             </div>
             <div class="text-center">
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -516,60 +595,104 @@
         <div class="modal-body">
           <form th:action="@{/vehicle/update}" class="row g-3" method="put">
             <div class="col-6">
-              <label for="idDetails" class="form-label">Id:</label>
-              <input type="text" class="form-control" id="idDetails" name="id" readonly>
-            </div>
-            <div class="col-6">
-              <label for="selectStateDetails" class="form-label">State/Province:</label>
-              <select class="form-select" id="selectStateDetails" aria-label="Default select example" name="stateid" required>
+              <label for="selectVehicleTypeDetails" class="form-label">Vehicle Type:</label>
+              <select class="form-select" id="selectVehicleTypeDetails" aria-label="Default select example" name="vehicletypeid" required>
                 <option selected>-SELECT-</option>
-                <option th:each="state : ${states}"
-                        th:value="${state.id}"
-                        th:text="${state.name}"
+                <option th:each="vehicleType : ${vehicleTypes}"
+                        th:value="${vehicleType.id}"
+                        th:text="${vehicleType.description}"
                 ></option>
               </select>
             </div>
             <div class="col-6">
-              <label for="nameDetails" class="form-label">Name:</label>
-              <input type="text" class="form-control" id="nameDetails" name="name" required>
+              <label for="vehicleNameDetails" class="form-label">Vehicle Name:</label>
+              <input type="text" class="form-control" id="vehicleNameDetails" name="name" required>
             </div>
             <div class="col-6">
-              <label for="selectCountryDetails" class="form-label">Country:</label>
-              <select class="form-select" id="selectCountryDetails" aria-label="Default select example" name="countryid" required>
+              <label for="vehicleNumberDetails" class="form-label">Vehicle Number:</label>
+              <input type="text" class="form-control" id="vehicleNumberDetails" name="vehicleNumber" required>
+            </div>
+            <div class="col-6">
+              <label for="registrationDateDetails" class="form-label">Registration Date:</label>
+              <input type="date" class="form-control" id="registrationDateDetails" name="registrationDate" required>
+            </div>
+            <div class="col-6">
+              <label for="descriptionDetails" class="form-label">Description:</label>
+              <input type="text" class="form-control" id="descriptionDetails" name="description" required>
+            </div>
+            <div class="col-6">
+              <label for="acquisitionDateDetails" class="form-label">Acquisition Date:</label>
+              <input type="date" class="form-control" id="acquisitionDateDetails" name="acquisitionDate" required>
+            </div>
+            <div class="col-6">
+              <label for="selectVehicleMakeDetails" class="form-label">Vehicle Make:</label>
+              <select class="form-select" id="selectVehicleMakeDetails" aria-label="Default select example" name="vehiclemakeid" required>
                 <option selected>-SELECT-</option>
-                <option th:each="country : ${countries}"
-                        th:value="${country.id}"
-                        th:text="${country.description}"
+                <option th:each="vehicleMake : ${vehicleMakes}"
+                        th:value="${vehicleMake.id}"
+                        th:text="${vehicleMake.description}"
                 ></option>
               </select>
             </div>
             <div class="col-6">
-              <label for="details" class="form-label">Details:</label>
-              <input type="text" class="form-control" id="details" name="details" required>
+              <label for="selectVehicleModelDetails" class="form-label">Vehicle Model:</label>
+              <select class="form-select" id="selectVehicleModelDetails" aria-label="Default select example" name="vehiclemodelid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="vehicleModel : ${vehicleModels}"
+                        th:value="${vehicleModel.id}"
+                        th:text="${vehicleModel.description}"
+                ></option>
+              </select>
             </div>
             <div class="col-6">
-              <label for="cityDetails" class="form-label">City:</label>
-              <input type="text" class="form-control" id="cityDetails" name="city" required>
+              <label for="selectCurrentLocationDetails" class="form-label">Current Location:</label>
+              <select class="form-select" id="selectCurrentLocationDetails" aria-label="Default select example" name="locationid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="location : ${locations}"
+                        th:value="${location.id}"
+                        th:text="${location.description}"
+                ></option>
+              </select>
             </div>
             <div class="col-6">
-              <label for="websiteDetails" class="form-label">Website:</label>
-              <input type="text" class="form-control" id="websiteDetails" name="website" required>
+              <label for="powerDetails" class="form-label">Power:</label>
+              <input type="text" class="form-control" id="powerDetails" name="power" required>
             </div>
             <div class="col-6">
-              <label for="phoneDetails" class="form-label">Phone:</label>
-              <input type="text" class="form-control" id="phoneDetails" name="phone" required>
+              <label for="fuelCapacityDetails" class="form-label">Fuel Capacity:</label>
+              <input type="text" class="form-control" id="fuelCapacityDetails" name="fuelCapacity" required>
             </div>
             <div class="col-6">
-              <label for="addressDetails" class="form-label">Address:</label>
-              <input type="text" class="form-control" id="addressDetails" name="address" required>
+              <label for="netWeightDetails" class="form-label">Net Weight:</label>
+              <input type="text" class="form-control" id="netWeightDetails" name="netWeight" required>
             </div>
             <div class="col-6">
-              <label for="mobileDetails" class="form-label">Mobile:</label>
-              <input type="text" class="form-control" id="mobileDetails" name="mobile" required>
+              <label for="remarksDetails" class="form-label">Remarks:</label>
+              <textarea type="text" class="form-control" id="remarksDetails" name="remarks" rows="2" required></textarea>
             </div>
             <div class="col-6">
-              <label for="emailDetails" class="form-label">Email:</label>
-              <input type="text" class="form-control" id="emailDetails" name="email" required>
+              <label for="selectEmployeeDetails" class="form-label">In Charge:</label>
+              <select class="form-select" id="selectEmployeeDetails" aria-label="Default select example" name="employeeid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="employee : ${employees}"
+                        th:value="${employee.id}"
+                        th:text="${employee.firstname}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="selectCurrentStatusDetails" class="form-label">Current Status:</label>
+              <select class="form-select" id="selectCurrentStatusDetails" aria-label="Default select example" name="vehiclestatusid" required>
+                <option selected>-SELECT-</option>
+                <option th:each="vehicleStatus : ${vehicleStatuses}"
+                        th:value="${vehicleStatus.id}"
+                        th:text="${vehicleStatus.description}"
+                ></option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="flpImageDetails" class="form-label">Select Image:</label>
+              <input type="file" class="form-control" id="flpImageDetails" name="photo" required>
             </div>
           </form><!-- Vertical Form -->
         </div>
