@@ -76,6 +76,17 @@ $(document).ready(function() {
         var href = $(this).attr('href');
         $('#confirmDeleteButton').attr('href',href);
         deleteModal.show();
+    });
+
+
+    $('table #photoButton').on('click',function(event) {
+        event.preventDefault();
+        var photoModal = new bootstrap.Modal(document.getElementById('photoModal'), {
+            keyboard: false
+        });
+        var href = $(this).attr('href');
+        $('#photoModal #employeePhoto').attr('src', href);
+        photoModal.show();
     })
     
     
